@@ -1,0 +1,49 @@
+.home-page {
+  padding: 24px;
+  max-width: 960px;
+  margin: auto;
+}
+
+.home-page h2 {
+  text-align: center;
+  font-size: 24px;
+  margin-bottom: 16px;
+}
+
+.campo-busca {
+  width: 100%;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  margin-bottom: 20px;
+}
+
+.lista-produtos {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 16px;
+}
+
+.card-produto {
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 16px;
+  background-color: #fff;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+  text-align: center;
+}
+
+.card-produto img {
+  max-width: 100%;
+  border-radius: 6px;
+}
+
+@media (max-width: 480px) {
+  .card-produto {
+    padding: 12px;
+  }
+
+  .home-page h2 {
+    font-size: 20px;
+  }
+}

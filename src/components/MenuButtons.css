@@ -1,0 +1,54 @@
+.lista-container h2 {
+  color: #0508bb;
+  background-color: bisque;
+}
+
+.lista-ul {
+  list-style: none;
+  padding: 0;
+}
+
+.produto-li {
+  border: 1px solid #ccc;
+  margin: 10px 0;
+  padding: 10px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  transition: box-shadow 0.2s ease-in-out;
+}
+
+.produto-li:hover {
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.produto-imagem {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+.produto-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.produto-nome-btn {
+  background: #98a2ac;
+  color: #fff;
+  border: 4px solid #98a2ac;
+  border-radius: 4px;
+  padding: 4px 12px;
+  cursor: pointer;
+  font-weight: bold;
+  width: fit-content;
+  text-align: left;
+  transition: background-color 0.8s;
+}
+
+.produto-nome-btn:hover {
+  background: #bdc8d3;
+}

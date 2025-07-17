@@ -1,0 +1,79 @@
+:root {
+  --bg-color: #121212;
+  --card-color: #1f1f1f;
+  --text-color: #f1f1f1;
+  --accent-color: #134cc5;
+  --danger-color: #ff4f4f;
+  --border-radius: 10px;
+  --shadow: 20px 4px 20px rgba(0, 0, 0, 10);
+}
+
+/* ====== Container Principal ====== */
+.App {
+  background-color: var(--bg-color);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem;
+  color: var(--text-color);
+  font-family: 'Segoe UI', Roboto, sans-serif;
+}
+
+/* ====== Card de Produto ====== */
+.card-produto {
+  background-color: var(--card-color);
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow);
+  padding: 1.5rem;
+  margin: 1rem 0;
+  width: 100%;
+  max-width: 600px;
+  transition: transform 0.3s ease;
+}
+.card-produto:hover {
+  transform: scale(1.01);
+}
+
+.card-produto h2 {
+  margin-bottom: 0.5rem;
+  color: var(--accent-color);
+  font-size: 1.3rem;
+}
+
+.card-produto p {
+  font-size: 14px;
+  margin: 4px 0;
+  color: #555;
+}
+
+/* ====== Destaques por Tipo ====== */
+.tipo-produto {
+  font-weight: bold;
+  color: var(--accent-color);
+}
+.quantidade-zero {
+  color: var(--danger-color);
+  font-weight: bold;
+}
+
+/* ====== Barra de Navegação ====== */
+.navbar {
+  display: flex 10px;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+.navbar a {
+  background-color: var(--accent-color);
+  color: var(--bg-color);
+  padding: 0.6rem 1.2rem;
+  border-radius: var(--border-radius);
+  text-decoration: none;
+  font-weight: bold;
+  transition: background-color 0.2s ease;
+}
+.navbar a:hover {
+  background-color: #000000;
+}

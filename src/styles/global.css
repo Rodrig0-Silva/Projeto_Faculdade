@@ -1,0 +1,50 @@
+/* styles/global.css */
+
+body {
+  font-family: "Segoe UI", Roboto, sans-serif;
+  background-color: #f4f6f8;
+  margin: 0;
+  padding: 0;
+  color: #333;
+}
+
+h1, h2, h3 {
+  font-weight: bold;
+  color: #222;
+}
+
+input, button {
+  font-family: inherit;
+}
+
+.container-padrao {
+  max-width: 960px;
+  margin: auto;
+  padding: 20px;
+}
+
+.btn-primario {
+  background-color: #1976d2;
+  color: white;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.btn-primario:hover {
+  background-color: #125ca1;
+}
+
+/* Responsivo */
+@media (max-width: 768px) {
+  .container-padrao {
+    padding: 16px;
+  }
+
+  .btn-primario {
+    width: 100%;
+  }
+}

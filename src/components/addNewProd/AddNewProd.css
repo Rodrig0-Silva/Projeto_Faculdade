@@ -1,0 +1,97 @@
+/* AddNewProd.css responsivo e elegante */
+
+.add-prod-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 24px;
+  max-width: 600px;
+  margin: 40px auto;
+  background: #fdfdfd;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.add-prod-form h2 {
+  text-align: center;
+  font-size: 24px;
+  margin-bottom: 20px;
+  color: #444;
+}
+
+.adicionar-produto-page {
+  padding: 20px;
+  max-width: 960px;
+  margin: auto;
+}
+
+.add-prod-form input,
+.add-prod-form button {
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 16px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.add-prod-form button {
+  background-color: #1976d2;
+  color: #fff;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.add-prod-form button:hover {
+  background-color: #1565c0;
+}
+
+/* Leitor QR */
+.scanner-container {
+  margin: 20px 0;
+  max-width: 400px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* 🌟 Responsivo com @media */
+@media (max-width: 768px) {
+  .add-prod-form {
+    padding: 16px;
+    max-width: 90%;
+  }
+
+  .add-prod-form h2 {
+    font-size: 20px;
+  }
+
+  .add-prod-form input,
+  .add-prod-form button {
+    font-size: 14px;
+    padding: 10px;
+  }
+
+  .scanner-container {
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .add-prod-form {
+    padding: 12px;
+    border-radius: 8px;
+    margin: 20px auto;
+  }
+
+  .add-prod-form h2 {
+    font-size: 18px;
+    margin-bottom: 12px;
+  }
+
+  .add-prod-form input,
+  .add-prod-form button {
+    font-size: 13px;
+    padding: 8px;
+  }
+}

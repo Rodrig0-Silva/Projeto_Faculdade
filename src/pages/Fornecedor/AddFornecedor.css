@@ -1,0 +1,26 @@
+.fornecedor-page {
+  padding: 24px;
+  max-width: 960px;
+  margin: auto;
+}
+
+.fornecedor-form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-top: 20px;
+}
+
+.fornecedor-form input,
+.fornecedor-form button {
+  padding: 10px;
+  font-size: 14px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+@media (max-width: 768px) {
+  .fornecedor-form {
+    grid-template-columns: 1fr;
+  }
+}
