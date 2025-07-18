@@ -1,12 +1,13 @@
 :root {
-  --bg-color: #121212;
-  --card-color: #1f1f1f;
-  --text-color: #f1f1f1;
+  --bg-color: #8a8484;
+  --card-color: #c0c9c9;
+  --text-color: #170303;
   --accent-color: #1e90ff;
   --danger-color: #ff4f4f;
   --border-radius: 10px;
   --shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
 }
+
 body {
   background-color: var(--bg-color);
   color: var(--text-color);
@@ -23,15 +24,15 @@ body {
   justify-content: center;
   gap: 1rem;
   padding: 1rem;
-  background-color: #bcb2b2;
+  background-color: #1f0404;
   margin-bottom: 2rem;
 }
 .menu-nav a {
   background-color: var(--accent-color);
-  color: white;
+  color: rgba(13, 5, 241, 0.738);
   padding: 0.6rem 1.2rem;
   border-radius: var(--border-radius);
-  text-decoration: none;
+  text-decoration: rgba(149, 149, 162, 0.738);
   font-weight: bold;
   transition: background-color 0.3s ease, transform 0.2s ease;
   display: flex;
@@ -41,6 +42,7 @@ body {
 .menu-nav a:hover {
   background-color: #007ae5;
   transform: translateY(-2px);
+  
 }
 .card-produto {
   background-color: var(--card-color);
