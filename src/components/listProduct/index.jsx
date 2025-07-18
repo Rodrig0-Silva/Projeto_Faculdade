@@ -1,7 +1,7 @@
-// frontend/components/listProduct/index.jsx
+
 import { useEffect, useState } from "react";
 import axios from "axios";
-import "./ListaProdutos.css"; // Importe o CSS
+import "./ListaProdutos.css";
 
 export default function ListaProdutos() {
   const [produtos, setProdutos] = useState([]);

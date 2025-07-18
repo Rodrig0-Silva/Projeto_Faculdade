@@ -2,10 +2,8 @@ import React, { useState } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { Scanner } from "@yudiel/react-qr-scanner";
-import "./AddNewProd.css"; // Certifique-se de ter um CSS para estilizar a página
+import "./AddNewProd.css";
 
-
-// Seria ideal mover os estilos para um arquivo .css
 const formStyles = { display: "flex", flexDirection: "column", gap: 10 };
 
 export default function AddNewProd({ onProdutoAdicionado }) {
@@ -13,7 +11,7 @@ export default function AddNewProd({ onProdutoAdicionado }) {
     nome: "",
     sku: "",
     descricao: "",
-    quantidade: 1, // Começar com 1 faz mais sentido do que 0
+    quantidade: 1,
     preco: "",
     imagem: "",
     tipo: ""
@@ -31,24 +29,22 @@ export default function AddNewProd({ onProdutoAdicionado }) {
     const sku = form.sku.trim().toUpperCase();
     if (!sku) return toast.warn("Informe ou escaneie um código de barras válido.");
 
-    // Aqui Rodrigo: Otimizado para usar a nova rota de verificação no backend
     try {
       const { data: existente } = await axios.get(`${import.meta.env.VITE_API_URL}/produtos/sku/${sku}`);
 
       if (existente) {
-        // Se o produto existe, atualiza a quantidade
+     
         const novaQuantidade = Number(existente.quantidade) + Number(form.quantidade);
         await axios.put(`${import.meta.env.VITE_API_URL}/produtos/${existente._id}`, {
-          quantidade: novaQuantidade // Enviamos apenas o campo a ser atualizado
+          quantidade: novaQuantidade
         });
         toast.info(`Quantidade do produto "${existente.nome}" atualizada para ${novaQuantidade}.`);
       } else {
-        // Se não existe, cria um novo produto
+
         await axios.post(`${import.meta.env.VITE_API_URL}/produtos`, { ...form, sku });
         toast.success("Produto adicionado com sucesso!");
       }
 
-      // Limpa o formulário após a operação
       setForm({
         nome: "",
         sku: "",
@@ -59,7 +55,7 @@ export default function AddNewProd({ onProdutoAdicionado }) {
         tipo: ""
       });
 
-      if (onProdutoAdicionado) onProdutoAdicionado(); // Avisa o componente pai para atualizar a lista
+      if (onProdutoAdicionado) onProdutoAdicionado();
       setExibirScanner(false);
 
     } catch (error) {

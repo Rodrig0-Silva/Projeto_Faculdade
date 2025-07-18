@@ -1,5 +1,3 @@
-// Conteúdo para src/pages/Home/index.jsx
-
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "./Home.css";
@@ -13,7 +11,6 @@ export default function Home() {
   useEffect(() => {
     async function carregarProdutos() {
       try {
-        // Use a variável de ambiente para a URL da API
         const response = await axios.get(`${import.meta.env.VITE_API_URL}/produtos`);
         setProdutos(response.data);
       } catch (error) {
@@ -33,8 +30,6 @@ export default function Home() {
     const sku = produto.sku?.toLowerCase() || "";
     return nome.includes(termo) || tipo.includes(termo) || sku.includes(termo);
   });
-
-  // A lista a ser exibida agora é sempre baseada na busca. Se a busca estiver vazia, mostra tudo.
   const listaExibida = busca ? produtosFiltrados : produtos;
 
   if (isLoading) return <p className="mensagem-feedback">Carregando produtos...</p>;

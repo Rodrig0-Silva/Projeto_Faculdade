@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
-import "./AddFornecedor.css"; // Certifique-se de que este arquivo contém o CSS abaixo
+import "./AddFornecedor.css";
 
 export default function AddFornecedor({ onFornecedorAdicionado }) {
   const [form, setForm] = useState({

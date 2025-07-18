@@ -23,7 +23,6 @@ export default function App() {
         closeOnClick
         pauseOnHover
       />
-
       <nav className="menu-nav">
         <Link to="/" className="App-button">
           <FaHome /> Início
@@ -41,8 +40,6 @@ export default function App() {
           <FaPlus /> Adicionar Fornecedor
         </Link>
       </nav>
-
-      
       <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/adicionar" element={<AdicionarProduto />} />
@@ -50,7 +47,6 @@ export default function App() {
           <Route path="/impressao" element={<ImpressaoSaida />} />
           <Route path="/fornecedor" element={<AddFornecedor />} />
       </Routes>
-
     </BrowserRouter>
   );
 }

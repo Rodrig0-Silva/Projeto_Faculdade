@@ -1,5 +1,4 @@
 :root {
-  /* 🎨 Paleta de Cores */
   --cor-primaria: #1976d2;
   --cor-primaria-hover: #125ca1;
   --cor-fundo: #f4f6f8;
@@ -7,19 +6,13 @@
   --cor-card: #ffffff;
   --cor-borda: #ccc;
   --cor-erro: #e53935;
-
-  /* 🖋️ Tipografia */
   --fonte-principal: 'Segoe UI', Roboto, sans-serif;
   --tamanho-base: 16px;
   --peso-bold: 700;
-
-  /* 📦 Espaçamento */
   --espacamento-padrao: 20px;
   --borda-raio: 8px;
   --sombra-leve: 0 2px 6px rgba(0,0,0,0.08);
 }
-
-/* Aplicação Global */
 body {
   font-family: var(--fonte-principal);
   background-color: var(--cor-fundo);
@@ -27,18 +20,15 @@ body {
   margin: 0;
   padding: 0;
 }
-
 h1, h2, h3 {
   font-weight: var(--peso-bold);
   color: var(--cor-texto);
 }
-
 .container-padrao {
   max-width: 960px;
   margin: auto;
   padding: var(--espacamento-padrao);
 }
-
 .btn-primario {
   background-color: var(--cor-primaria);
   color: white;
@@ -49,11 +39,9 @@ h1, h2, h3 {
   cursor: pointer;
   transition: background 0.3s;
 }
-
 .btn-primario:hover {
   background-color: var(--cor-primaria-hover);
 }
-
 .card {
   background-color: var(--cor-card);
   border: 1px solid var(--cor-borda);
@@ -61,8 +49,6 @@ h1, h2, h3 {
   box-shadow: var(--sombra-leve);
   padding: var(--espacamento-padrao);
 }
-
-/* 🌍 Responsivo */
 @media (max-width: 768px) {
   .container-padrao {
     padding: 16px;

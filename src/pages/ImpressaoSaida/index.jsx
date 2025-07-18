@@ -2,13 +2,12 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import jsPDF from "jspdf";
 import autoTable from "jspdf-autotable";
-import "./ImpressaoSaida.css"; // Certifique-se de ter um CSS para estilizar a página
+import "./ImpressaoSaida.css";
 
 export default function ImpressaoSaida() {
   const [saidas, setSaidas] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
-  // Aqui Rodrigo: Agora fazemos apenas UMA chamada de API, já com os dados populados.
   useEffect(() => {
     async function carregarSaidas() {
       try {
@@ -37,11 +36,10 @@ export default function ImpressaoSaida() {
     autoTable(doc, {
       startY: 25,
       head: [["Produto", "Quantidade", "Data da Saída"]],
-      // Aqui Rodrigo: Acessamos o nome do produto diretamente. Não precisamos mais de getNomeProduto.
       body: saidas.map(saida => [
-        saida.produto ? saida.produto.nome : 'Produto não encontrado', // Acessamos o nome diretamente
+        saida.produto ? saida.produto.nome : 'Produto não encontrado',
         saida.quantidade,
-        new Date(saida.createdAt || saida.data).toLocaleString('pt-BR') // Usando o timestamp do Mongoose
+        new Date(saida.createdAt || saida.data).toLocaleString('pt-BR')
       ])
     });
 
