@@ -8,10 +8,12 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
+// --- CONEXÃO COM O BANCO DE DADOS ---
 mongoose.connect(process.env.MONGO_URI)
     .then(() => console.log('Conectado ao MongoDB.'))
-    .catch(error => console.error('Erro ao conectar com o MongoDB:', error));
+    .catch(err => console.error('Erro ao conectar com o MongoDB:', err));
 
+// --- DEFINIÇÃO DOS SCHEMAS E MODELS ---
 const ProdutoSchema = new mongoose.Schema({
     nome: { type: String, required: true },
     sku: { type: String, required: true, unique: true },
@@ -29,8 +31,7 @@ const FornecedorSchema = new mongoose.Schema({
     endereco: String,
     telefone: String,
     email: String,
-    contato: String,
-    status: { type: String, default: 'ativo' } // Adicionado campo status
+    contato: String
 }, { timestamps: true });
 const Fornecedor = mongoose.model('Fornecedor', FornecedorSchema);
 
@@ -40,12 +41,15 @@ const SaidaSchema = new mongoose.Schema({
 }, { timestamps: true });
 const Saida = mongoose.model('Saida', SaidaSchema);
 
+// --- ROTAS DA API ---
+
+// == ROTAS DE PRODUTOS ==
 app.get('/produtos', async (req, res) => {
     try {
         const produtos = await Produto.find();
         res.json(produtos);
-    } catch (error) {
-        res.status(500).json({ message: error.message });
+    } catch (err) {
+        res.status(500).json({ message: err.message });
     }
 });
 
@@ -53,8 +57,8 @@ app.get('/produtos/sku/:sku', async (req, res) => {
     try {
         const produto = await Produto.findOne({ sku: req.params.sku });
         res.json(produto);
-    } catch (error) {
-        res.status(500).json({ message: error.message });
+    } catch (err) {
+        res.status(500).json({ message: err.message });
     }
 });
 
@@ -63,8 +67,8 @@ app.get('/produtos/:id', async (req, res) => {
         const produto = await Produto.findById(req.params.id);
         if (!produto) return res.status(404).json({ message: 'Produto não encontrado' });
         res.json(produto);
-    } catch (error) {
-        res.status(500).json({ message: error.message });
+    } catch (err) {
+        res.status(500).json({ message: err.message });
     }
 });
 
@@ -73,11 +77,11 @@ app.post('/produtos', async (req, res) => {
     try {
         const produtoSalvo = await novoProduto.save();
         res.status(201).json(produtoSalvo);
-    } catch (error) {
-        if (error.code === 11000) {
+    } catch (err) {
+        if (err.code === 11000) {
             return res.status(400).json({ message: "SKU já cadastrado." });
         }
-        res.status(400).json({ message: error.message });
+        res.status(400).json({ message: err.message });
     }
 });
 
@@ -86,27 +90,28 @@ app.put('/produtos/:id', async (req, res) => {
         const produtoAtualizado = await Produto.findByIdAndUpdate(req.params.id, req.body, { new: true });
         if (!produtoAtualizado) return res.status(404).json({ message: 'Produto não encontrado' });
         res.json(produtoAtualizado);
-    } catch (error) {
-        res.status(400).json({ message: error.message });
+    } catch (err) {
+        res.status(400).json({ message: err.message });
     }
 });
 
 app.delete('/produtos/:id', async (req, res) => {
     try {
         const produtoDeletado = await Produto.findByIdAndDelete(req.params.id);
-        if (!produtoDeletado) return res.status(404).json({ message: 'Produto não encontrado' });
+        if (!produtoDeletado) return res.status(404).json({ message: 'Produto deletado com sucesso' });
         res.json({ message: 'Produto deletado com sucesso' });
-    } catch (error) {
-        res.status(500).json({ message: error.message });
+    } catch (err) {
+        res.status(500).json({ message: err.message });
     }
 });
 
+// == ROTAS DE SAÍDAS ==
 app.get('/saidas', async (req, res) => {
     try {
         const saidas = await Saida.find().populate('produto').sort({ createdAt: -1 });
         res.json(saidas);
-    } catch (error) {
-        res.status(500).json({ message: error.message });
+    } catch (err) {
+        res.status(500).json({ message: err.message });
     }
 });
 
@@ -118,9 +123,7 @@ app.post('/api/registrar-saida', async (req, res) => {
     try {
         const produto = await Produto.findById(produtoId);
         if (!produto) return res.status(404).json({ message: "Produto não encontrado." });
-        if (produto.quantidade < quantidadeSaida) {
-            return res.status(400).json({ message: `Estoque insuficiente. Disponível: ${produto.quantidade}` });
-        }
+        if (produto.quantidade < quantidadeSaida) return res.status(400).json({ message: `Estoque insuficiente. Disponível: ${produto.quantidade}` });
         produto.quantidade -= quantidadeSaida;
         await produto.save();
         const novaSaida = new Saida({ produto: produtoId, quantidade: quantidadeSaida });
@@ -133,6 +136,7 @@ app.post('/api/registrar-saida', async (req, res) => {
     }
 });
 
+// == ROTAS DE FORNECEDORES E SERVIÇOS ==
 app.get('/api/consulta-cnpj/:cnpj', async (req, res) => {
     try {
         const cnpj = req.params.cnpj.replace(/\D/g, '');
@@ -149,11 +153,11 @@ app.post('/fornecedores', async (req, res) => {
     try {
         const fornecedorSalvo = await novoFornecedor.save();
         res.status(201).json(fornecedorSalvo);
-    } catch (error) {
-        if (error.code === 11000) {
+    } catch (err) {
+        if (err.code === 11000) {
             return res.status(400).json({ message: "Fornecedor com este CNPJ já cadastrado." });
         }
-        res.status(400).json({ message: error.message });
+        res.status(400).json({ message: err.message });
     }
 });
 
@@ -161,41 +165,12 @@ app.get('/api/fornecedores/cnpj/:cnpj', async (req, res) => {
     try {
         const fornecedor = await Fornecedor.findOne({ cnpj: req.params.cnpj });
         res.json(fornecedor);
-    } catch (error) {
-        res.status(500).json({ message: error.message });
+    } catch (err) {
+        res.status(500).json({ message: err.message });
     }
 });
 
-app.get('/produtos/estoque-baixo', async (req, res) => {
-    try {
-        const limite = parseInt(req.query.limite) || 5;
-        const produtos = await Produto.find({ quantidade: { $lt: limite } });
-        res.json(produtos);
-    } catch (error) {
-        res.status(500).json({ message: 'Erro ao buscar produtos com estoque baixo.' });
-    }
-});
-
-app.put('/fornecedores/:id/status', async (req, res) => {
-    try {
-        const { status } = req.body;
-        if (!status) return res.status(400).json({ message: 'Status não fornecido.' });
-
-        const fornecedorAtualizado = await Fornecedor.findByIdAndUpdate(
-            req.params.id,
-            { status },
-            { new: true }
-        );
-
-        if (!fornecedorAtualizado) return res.status(404).json({ message: 'Fornecedor não encontrado.' });
-
-        res.json(fornecedorAtualizado);
-    } catch (error) {
-        res.status(500).json({ message: 'Erro ao atualizar status do fornecedor.' });
-    }
-});
-
-//servidor
+// --- INICIALIZAÇÃO DO SERVIDOR ---
 const PORT = process.env.PORT || 8800;
 app.listen(PORT, () => {
     console.log(`Servidor completo rodando na porta ${PORT}`);
