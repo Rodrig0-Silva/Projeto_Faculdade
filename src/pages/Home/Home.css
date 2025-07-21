@@ -50,8 +50,8 @@
 }
 
 .card-produto img {
-  width: 30%;
-  height: 100px;
+  width: center;
+  height: 180px;
   border-radius: var(--border-radius);
   object-fit: cover;
   display: block;
