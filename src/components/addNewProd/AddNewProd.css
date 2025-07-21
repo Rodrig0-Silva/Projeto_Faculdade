@@ -54,7 +54,7 @@
 }
 
 /* 🌟 Responsivo com @media */
-@media (max-width: 768px) {
+@media (max-width: 268px) {
   .add-prod-form {
     padding: 16px;
     max-width: 90%;
