@@ -104,14 +104,14 @@ app.delete('/produtos/:id', async (req, res) => {
 });
 
 // NOVO ENDPOINT
-app.get('/produtos/tipo/:tipo', async (req, res) => {
-    try {
-        const produtos = await Produto.find({ tipo: req.params.tipo });
-        res.json(produtos);
-    } catch (err) {
-        res.status(500).json({ message: err.message });
-    }
-});
+// app.get('/produtos/tipo/:tipo', async (req, res) => {
+//     try {
+//         const produtos = await Produto.find({ tipo: req.params.tipo });
+//         res.json(produtos);
+//     } catch (err) {
+//         res.status(500).json({ message: err.message });
+//     }
+// });
 
 // == ROTAS DE SAÍDAS ==
 app.get('/saidas', async (req, res) => {
@@ -145,14 +145,14 @@ app.post('/api/registrar-saida', async (req, res) => {
 });
 
 // NOVO ENDPOINT
-app.get('/fornecedores', async (req, res) => {
-    try {
-        const fornecedores = await Fornecedor.find();
-        res.json(fornecedores);
-    } catch (err) {
-        res.status(500).json({ message: err.message });
-    }
-});
+// app.get('/fornecedores', async (req, res) => {
+//     try {
+//         const fornecedores = await Fornecedor.find();
+//         res.json(fornecedores);
+//     } catch (err) {
+//         res.status(500).json({ message: err.message });
+//     }
+// });
 
 // == ROTAS DE FORNECEDORES E SERVIÇOS ==
 app.get('/api/consulta-cnpj/:cnpj', async (req, res) => {
